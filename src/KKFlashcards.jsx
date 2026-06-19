@@ -385,6 +385,14 @@ function speak(text) {
   window.speechSynthesis.speak(utt);
 }
 
+function buildQuizQuestion(phoneme, pool) {
+  const type = Math.random() < 0.5 ? "A" : "B";
+  const distractors = shuffle(pool.filter((p) => p.symbol !== phoneme.symbol)).slice(0, 3);
+  const options = shuffle([phoneme, ...distractors]);
+  const correctIndex = options.findIndex((o) => o.symbol === phoneme.symbol);
+  return { type, phoneme, options, correctIndex };
+}
+
 export default function KKFlashcards() {
   const [deck, setDeck] = useState(() => shuffle(kkPhonemes));
   const [index, setIndex] = useState(0);
@@ -393,6 +401,15 @@ export default function KKFlashcards() {
   const [filter, setFilter] = useState("全部");
   const [direction, setDirection] = useState(1);
   const [animating, setAnimating] = useState(false);
+  const [mode, setMode] = useState("flashcard"); // "flashcard" | "quiz"
+
+  // Quiz state
+  const [quizQueue, setQuizQueue] = useState([]);
+  const [quizIndex, setQuizIndex] = useState(0);
+  const [quizQuestion, setQuizQuestion] = useState(null);
+  const [selected, setSelected] = useState(null);
+  const [score, setScore] = useState(0);
+  const [quizFinished, setQuizFinished] = useState(false);
 
   const current = deck[index];
   const progress = Math.round(((seen.size) / deck.length) * 100);
@@ -409,6 +426,51 @@ export default function KKFlashcards() {
     setFlipped(false);
     setSeen(new Set());
   }, [filter]);
+
+  const startQuiz = useCallback(() => {
+    const pool =
+      filter === "全部"
+        ? kkPhonemes
+        : kkPhonemes.filter((p) => p.type === filter);
+    const queue = shuffle(pool);
+    setQuizQueue(queue);
+    setQuizIndex(0);
+    setScore(0);
+    setSelected(null);
+    setQuizFinished(false);
+    setQuizQuestion(buildQuizQuestion(queue[0], pool));
+  }, [filter]);
+
+  useEffect(() => {
+    if (mode === "quiz") startQuiz();
+  }, [mode, filter, startQuiz]);
+
+  useEffect(() => {
+    if (mode === "quiz" && quizQuestion?.type === "B") {
+      speak(quizQuestion.phoneme.examples[0]);
+    }
+  }, [mode, quizQuestion]);
+
+  const handleQuizAnswer = (optionIndex) => {
+    if (selected !== null || !quizQuestion) return;
+    setSelected(optionIndex);
+    const correct = optionIndex === quizQuestion.correctIndex;
+    if (correct) setScore((s) => s + 1);
+    setTimeout(() => {
+      const nextIndex = quizIndex + 1;
+      if (nextIndex >= quizQueue.length) {
+        setQuizFinished(true);
+        return;
+      }
+      const pool =
+        filter === "全部"
+          ? kkPhonemes
+          : kkPhonemes.filter((p) => p.type === filter);
+      setQuizIndex(nextIndex);
+      setQuizQuestion(buildQuizQuestion(quizQueue[nextIndex], pool));
+      setSelected(null);
+    }, 1000);
+  };
 
   const goNext = useCallback(() => {
     if (animating) return;
@@ -500,6 +562,53 @@ export default function KKFlashcards() {
         ))}
       </div>
 
+      {/* Mode toggle */}
+      <div style={{ display: "flex", gap: "8px", position: "relative" }}>
+        <button
+          onClick={() => setMode((m) => (m === "flashcard" ? "quiz" : "flashcard"))}
+          style={{
+            padding: "6px 16px",
+            borderRadius: "20px",
+            border: "1px solid #444",
+            background: mode === "quiz" ? "#f0f0f0" : "transparent",
+            color: mode === "quiz" ? "#0f0f12" : "#aaa",
+            fontSize: "12px",
+            cursor: "pointer",
+            letterSpacing: "0.5px",
+          }}
+        >
+          {mode === "quiz" ? "🗂 切換回字卡" : "🎯 測驗"}
+        </button>
+        {mode === "quiz" && quizQueue.length > 0 && (
+          <div style={{
+            position: "absolute",
+            right: "-110px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            color: "#f0f0f0",
+            fontSize: "13px",
+            fontWeight: "600",
+            whiteSpace: "nowrap",
+          }}>
+            分數 {score} / {quizQueue.length}
+          </div>
+        )}
+      </div>
+
+      {mode === "quiz" ? (
+        <QuizPanel
+          quizQuestion={quizQuestion}
+          quizIndex={quizIndex}
+          quizQueueLength={quizQueue.length}
+          selected={selected}
+          score={score}
+          quizFinished={quizFinished}
+          onAnswer={handleQuizAnswer}
+          onRestart={startQuiz}
+          onReplay={() => quizQuestion && speak(quizQuestion.phoneme.examples[0])}
+        />
+      ) : (
+      <>
       {/* Progress */}
       <div style={{ width: "320px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", color: "#555", fontSize: "11px", marginBottom: "6px" }}>
@@ -543,12 +652,16 @@ export default function KKFlashcards() {
         {!flipped ? (
           // Front
           <>
-            <div style={{
-              fontSize: "88px",
-              color: "#f0f0f0",
-              lineHeight: 1,
-              fontFamily: "'Georgia', serif",
-            }}>
+            <div
+              onClick={(e) => { e.stopPropagation(); speak(current.examples[0]); }}
+              style={{
+                fontSize: "88px",
+                color: "#f0f0f0",
+                lineHeight: 1,
+                fontFamily: "'Georgia', serif",
+                cursor: "pointer",
+              }}
+            >
               {current.symbol}
             </div>
             <div style={{
@@ -685,6 +798,165 @@ export default function KKFlashcards() {
       <div style={{ color: "#333", fontSize: "11px", letterSpacing: "1px" }}>
         ← → 換卡　空白鍵 翻面　🔊 點例字聽發音
       </div>
+      </>
+      )}
     </div>
+  );
+}
+
+function QuizPanel({
+  quizQuestion,
+  quizIndex,
+  quizQueueLength,
+  selected,
+  score,
+  quizFinished,
+  onAnswer,
+  onRestart,
+  onReplay,
+}) {
+  if (quizFinished) {
+    return (
+      <div style={{
+        width: "320px",
+        minHeight: "380px",
+        background: "#1a1a1f",
+        border: "2px solid #2a2a30",
+        borderRadius: "20px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "16px",
+        padding: "32px 24px",
+        boxSizing: "border-box",
+      }}>
+        <div style={{ color: "#888", fontSize: "12px", letterSpacing: "2px", textTransform: "uppercase" }}>
+          測驗結束
+        </div>
+        <div style={{ color: "#f0f0f0", fontSize: "40px", fontWeight: "300" }}>
+          {score} / {quizQueueLength}
+        </div>
+        <div style={{ color: "#666", fontSize: "13px" }}>
+          正確率 {Math.round((score / quizQueueLength) * 100)}%
+        </div>
+        <button
+          onClick={onRestart}
+          style={{
+            marginTop: "12px",
+            padding: "10px 24px",
+            borderRadius: "24px",
+            border: "1px solid #444",
+            background: "#f0f0f0",
+            color: "#0f0f12",
+            fontSize: "13px",
+            cursor: "pointer",
+            letterSpacing: "1px",
+          }}
+        >
+          重新開始
+        </button>
+      </div>
+    );
+  }
+
+  if (!quizQuestion) return null;
+
+  const { type, phoneme, options, correctIndex } = quizQuestion;
+
+  return (
+    <>
+      <div style={{ width: "320px", color: "#555", fontSize: "11px", textAlign: "right" }}>
+        第 {quizIndex + 1} / {quizQueueLength} 題
+      </div>
+      <div style={{
+        width: "320px",
+        minHeight: "380px",
+        background: "#1a1a1f",
+        border: "2px solid #2a2a30",
+        borderRadius: "20px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "32px 24px",
+        gap: "20px",
+        boxSizing: "border-box",
+      }}>
+        {type === "A" ? (
+          <>
+            <div style={{ color: "#666", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase" }}>
+              這個符號的發音是？
+            </div>
+            <div style={{ fontSize: "72px", color: "#f0f0f0", lineHeight: 1, fontFamily: "'Georgia', serif" }}>
+              {phoneme.symbol}
+            </div>
+          </>
+        ) : (
+          <>
+            <div style={{ color: "#666", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase" }}>
+              聽發音，選出正確的音標符號
+            </div>
+            <button
+              onClick={onReplay}
+              style={{
+                width: "64px",
+                height: "64px",
+                borderRadius: "50%",
+                border: "1px solid #444",
+                background: "transparent",
+                color: "#f0f0f0",
+                fontSize: "26px",
+                cursor: "pointer",
+              }}
+            >
+              🔊
+            </button>
+          </>
+        )}
+
+        <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "10px" }}>
+          {options.map((opt, i) => {
+            let bg = "rgba(255,255,255,0.05)";
+            let border = "1px solid #333";
+            let color = "#ccc";
+            if (selected !== null) {
+              if (i === correctIndex) {
+                bg = "rgba(76, 175, 80, 0.25)";
+                border = "1px solid #4caf50";
+                color = "#aaffae";
+              } else if (i === selected) {
+                bg = "rgba(244, 67, 54, 0.25)";
+                border = "1px solid #f44336";
+                color = "#ffb3ad";
+              }
+            }
+            return (
+              <button
+                key={opt.symbol}
+                onClick={() => onAnswer(i)}
+                disabled={selected !== null}
+                style={{
+                  width: "100%",
+                  textAlign: "left",
+                  padding: "10px 14px",
+                  borderRadius: "10px",
+                  border,
+                  background: bg,
+                  color,
+                  fontSize: type === "A" ? "13px" : "20px",
+                  cursor: selected !== null ? "default" : "pointer",
+                  fontFamily: "'Georgia', serif",
+                  transition: "all 0.2s",
+                  boxSizing: "border-box",
+                }}
+              >
+                {type === "A" ? opt.description : opt.symbol}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </>
   );
 }
