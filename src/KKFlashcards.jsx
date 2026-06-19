@@ -396,7 +396,6 @@ function buildQuizQuestion(phoneme, pool) {
 export default function KKFlashcards() {
   const [deck, setDeck] = useState(() => shuffle(kkPhonemes));
   const [index, setIndex] = useState(0);
-  const [flipped, setFlipped] = useState(false);
   const [seen, setSeen] = useState(new Set());
   const [filter, setFilter] = useState("全部");
   const [direction, setDirection] = useState(1);
@@ -423,7 +422,6 @@ export default function KKFlashcards() {
         : kkPhonemes.filter((p) => p.type === filter);
     setDeck(shuffle(filtered));
     setIndex(0);
-    setFlipped(false);
     setSeen(new Set());
   }, [filter]);
 
@@ -479,7 +477,6 @@ export default function KKFlashcards() {
     setSeen((s) => new Set([...s, current.symbol]));
     setTimeout(() => {
       setIndex((i) => (i + 1) % deck.length);
-      setFlipped(false);
       setAnimating(false);
     }, 220);
   }, [animating, current, deck.length]);
@@ -490,7 +487,6 @@ export default function KKFlashcards() {
     setDirection(-1);
     setTimeout(() => {
       setIndex((i) => (i - 1 + deck.length) % deck.length);
-      setFlipped(false);
       setAnimating(false);
     }, 220);
   }, [animating, deck.length]);
@@ -502,7 +498,6 @@ export default function KKFlashcards() {
         : kkPhonemes.filter((p) => p.type === filter);
     setDeck(shuffle(filtered));
     setIndex(0);
-    setFlipped(false);
     setSeen(new Set());
   };
 
@@ -510,7 +505,6 @@ export default function KKFlashcards() {
     const handle = (e) => {
       if (e.key === "ArrowRight") goNext();
       if (e.key === "ArrowLeft") goPrev();
-      if (e.key === " ") { e.preventDefault(); setFlipped((f) => !f); }
     };
     window.addEventListener("keydown", handle);
     return () => window.removeEventListener("keydown", handle);
@@ -628,14 +622,12 @@ export default function KKFlashcards() {
 
       {/* Card */}
       <div
-        onClick={() => setFlipped((f) => !f)}
         style={{
           width: "320px",
           minHeight: "380px",
-          background: flipped ? current.color : "#1a1a1f",
-          border: flipped ? `2px solid ${current.accent}` : "2px solid #2a2a30",
+          background: current.color,
+          border: `2px solid ${current.accent}`,
           borderRadius: "20px",
-          cursor: "pointer",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -649,90 +641,70 @@ export default function KKFlashcards() {
           userSelect: "none",
         }}
       >
-        {!flipped ? (
-          // Front
-          <>
-            <div
-              onClick={(e) => { e.stopPropagation(); speak(current.examples[0]); }}
+        <div
+          onClick={() => speak(current.examples[0])}
+          style={{
+            fontSize: "72px",
+            color: current.accent,
+            lineHeight: 1,
+            fontFamily: "'Georgia', serif",
+            cursor: "pointer",
+          }}
+        >
+          {current.symbol}
+        </div>
+        <div style={{
+          color: "#555",
+          fontSize: "12px",
+          letterSpacing: "2px",
+          textTransform: "uppercase",
+        }}>
+          {current.type}
+        </div>
+        <div style={{
+          fontSize: "15px",
+          color: "#1a1a1f",
+          fontWeight: "600",
+          letterSpacing: "0.5px",
+        }}>
+          {current.name}
+        </div>
+        <div style={{
+          fontSize: "13px",
+          color: "#333",
+          textAlign: "center",
+          lineHeight: 1.7,
+          maxWidth: "240px",
+        }}>
+          {current.description}
+        </div>
+        <div style={{ width: "100%", borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: "14px", display: "flex", flexDirection: "column", gap: "6px" }}>
+          {current.examples.map((ex, i) => (
+            <button
+              key={i}
+              onClick={() => speak(ex)}
               style={{
-                fontSize: "88px",
-                color: "#f0f0f0",
-                lineHeight: 1,
-                fontFamily: "'Georgia', serif",
+                background: "rgba(0,0,0,0.06)",
+                border: "none",
+                borderRadius: "8px",
+                padding: "6px 12px",
+                fontSize: "13px",
+                color: "#1a1a1f",
                 cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                fontFamily: "'Georgia', serif",
+                transition: "background 0.2s",
               }}
+              onMouseEnter={(e) => e.currentTarget.style.background = "rgba(0,0,0,0.12)"}
+              onMouseLeave={(e) => e.currentTarget.style.background = "rgba(0,0,0,0.06)"}
             >
-              {current.symbol}
-            </div>
-            <div style={{
-              color: "#444",
-              fontSize: "12px",
-              letterSpacing: "2px",
-              textTransform: "uppercase",
-            }}>
-              {current.type}
-            </div>
-            <div style={{ color: "#333", fontSize: "12px", marginTop: "24px" }}>
-              點擊翻面 · 空白鍵
-            </div>
-          </>
-        ) : (
-          // Back
-          <>
-            <div style={{
-              fontSize: "52px",
-              color: current.accent,
-              lineHeight: 1,
-              fontFamily: "'Georgia', serif",
-            }}>
-              {current.symbol}
-            </div>
-            <div style={{
-              fontSize: "15px",
-              color: "#1a1a1f",
-              fontWeight: "600",
-              letterSpacing: "0.5px",
-            }}>
-              {current.name}
-            </div>
-            <div style={{
-              fontSize: "13px",
-              color: "#333",
-              textAlign: "center",
-              lineHeight: 1.7,
-              maxWidth: "240px",
-            }}>
-              {current.description}
-            </div>
-            <div style={{ width: "100%", borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: "14px", display: "flex", flexDirection: "column", gap: "6px" }}>
-              {current.examples.map((ex, i) => (
-                <button
-                  key={i}
-                  onClick={(e) => { e.stopPropagation(); speak(ex); }}
-                  style={{
-                    background: "rgba(0,0,0,0.06)",
-                    border: "none",
-                    borderRadius: "8px",
-                    padding: "6px 12px",
-                    fontSize: "13px",
-                    color: "#1a1a1f",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    fontFamily: "'Georgia', serif",
-                    transition: "background 0.2s",
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = "rgba(0,0,0,0.12)"}
-                  onMouseLeave={(e) => e.currentTarget.style.background = "rgba(0,0,0,0.06)"}
-                >
-                  <span style={{ fontSize: "14px" }}>🔊</span>
-                  {ex}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+              <span style={{ fontSize: "14px" }}>🔊</span>
+              {ex}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Controls */}
@@ -796,7 +768,7 @@ export default function KKFlashcards() {
       </div>
 
       <div style={{ color: "#333", fontSize: "11px", letterSpacing: "1px" }}>
-        ← → 換卡　空白鍵 翻面　🔊 點例字聽發音
+        ← → 換卡　🔊 點符號或例字聽發音
       </div>
       </>
       )}
@@ -891,6 +863,21 @@ function QuizPanel({
             <div style={{ fontSize: "72px", color: "#f0f0f0", lineHeight: 1, fontFamily: "'Georgia', serif" }}>
               {phoneme.symbol}
             </div>
+            <button
+              onClick={onReplay}
+              style={{
+                padding: "8px 16px",
+                borderRadius: "20px",
+                border: "1px solid #444",
+                background: "transparent",
+                color: "#f0f0f0",
+                fontSize: "13px",
+                cursor: "pointer",
+                letterSpacing: "0.5px",
+              }}
+            >
+              🔊 播放發音
+            </button>
           </>
         ) : (
           <>
