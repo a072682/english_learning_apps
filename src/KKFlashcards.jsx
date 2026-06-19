@@ -4,6 +4,7 @@ const kkPhonemes = [
   // 母音 Vowels
   {
     symbol: "i",
+    audioFile: "i.mp3",
     type: "母音",
     name: "長音 i",
     description: "嘴角向兩側拉開，像微笑，舌頭前高位",
@@ -14,6 +15,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ɪ",
+    audioFile: "ɪ.mp3",
     type: "母音",
     name: "短音 i",
     description: "嘴巴略微張開，比 i 放鬆，舌頭稍低",
@@ -24,6 +26,7 @@ const kkPhonemes = [
   },
   {
     symbol: "e",
+    audioFile: "e.mp3",
     type: "母音",
     name: "長音 e",
     description: "嘴角向兩側拉，舌頭前中位",
@@ -34,6 +37,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ɛ",
+    audioFile: "ɛ.mp3",
     type: "母音",
     name: "短音 e",
     description: "嘴巴半開，舌頭前中低位",
@@ -44,6 +48,7 @@ const kkPhonemes = [
   },
   {
     symbol: "æ",
+    audioFile: "æ.mp3",
     type: "母音",
     name: "æ（ash）",
     description: "嘴巴大張，比 e 更開，下巴下沉，這個音中文沒有",
@@ -54,6 +59,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ɑ",
+    audioFile: "ɑ.mp3",
     type: "母音",
     name: "長音 a",
     description: "嘴巴完全張開，舌頭後低位，放鬆",
@@ -64,6 +70,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ɔ",
+    audioFile: "ɔ.mp3",
     type: "母音",
     name: "長音 o（開）",
     description: "嘴巴半開半圓，嘴唇略微圓起，舌後低位",
@@ -74,6 +81,7 @@ const kkPhonemes = [
   },
   {
     symbol: "o",
+    audioFile: "o.mp3",
     type: "母音",
     name: "長音 o",
     description: "嘴唇圓起向前，舌頭後中高位",
@@ -84,6 +92,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ʊ",
+    audioFile: "ʊ.mp3",
     type: "母音",
     name: "短音 u",
     description: "嘴唇略圓，比 u 放鬆，舌頭後高位但不緊",
@@ -94,6 +103,7 @@ const kkPhonemes = [
   },
   {
     symbol: "u",
+    audioFile: "u.mp3",
     type: "母音",
     name: "長音 u",
     description: "嘴唇圓起緊縮向前，舌頭後高位",
@@ -104,6 +114,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ʌ",
+    audioFile: "ʌ.mp3",
     type: "母音",
     name: "短音 u（中央）",
     description: "嘴巴半開，舌頭中央偏低，嘴唇不圓",
@@ -114,6 +125,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ə",
+    audioFile: "ə.mp3",
     type: "母音",
     name: "弱化母音 schwa",
     description: "英文最常見的音，完全放鬆，嘴巴微開，不用力",
@@ -124,6 +136,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ɚ",
+    audioFile: "ɚ.mp3",
     type: "母音",
     name: "r 化母音",
     description: "發 ə 同時舌頭中後部往上捲，這個音中文沒有",
@@ -134,6 +147,7 @@ const kkPhonemes = [
   },
   {
     symbol: "aɪ",
+    audioFile: "aɪ.mp3",
     type: "雙母音",
     name: "雙母音 ai",
     description: "從 ɑ 滑向 ɪ，下巴先降後升",
@@ -144,6 +158,7 @@ const kkPhonemes = [
   },
   {
     symbol: "aʊ",
+    audioFile: "aʊ.mp3",
     type: "雙母音",
     name: "雙母音 au",
     description: "從 ɑ 滑向 ʊ，嘴先開後圓",
@@ -154,6 +169,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ɔɪ",
+    audioFile: "ɔɪ.mp3",
     type: "雙母音",
     name: "雙母音 oi",
     description: "從 ɔ 滑向 ɪ，嘴唇先圓後展",
@@ -165,6 +181,7 @@ const kkPhonemes = [
   // 子音 Consonants
   {
     symbol: "p",
+    audioFile: "p.mp3",
     type: "子音",
     name: "p",
     description: "雙唇閉合後爆破送氣，氣流強",
@@ -175,6 +192,7 @@ const kkPhonemes = [
   },
   {
     symbol: "b",
+    audioFile: "b.mp3",
     type: "子音",
     name: "b",
     description: "雙唇閉合後爆破，有聲（喉嚨振動）",
@@ -185,6 +203,7 @@ const kkPhonemes = [
   },
   {
     symbol: "t",
+    audioFile: "t.mp3",
     type: "子音",
     name: "t",
     description: "舌尖頂上齒齦，爆破送氣",
@@ -195,6 +214,7 @@ const kkPhonemes = [
   },
   {
     symbol: "d",
+    audioFile: "d.mp3",
     type: "子音",
     name: "d",
     description: "舌尖頂上齒齦，爆破有聲",
@@ -205,6 +225,7 @@ const kkPhonemes = [
   },
   {
     symbol: "k",
+    audioFile: "k.mp3",
     type: "子音",
     name: "k",
     description: "舌後部頂軟顎，爆破送氣",
@@ -215,6 +236,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ɡ",
+    audioFile: "g.mp3",
     type: "子音",
     name: "g",
     description: "舌後部頂軟顎，爆破有聲",
@@ -225,6 +247,7 @@ const kkPhonemes = [
   },
   {
     symbol: "f",
+    audioFile: "f.mp3",
     type: "子音",
     name: "f",
     description: "上齒輕咬下唇，氣流從縫隙穿出",
@@ -235,6 +258,7 @@ const kkPhonemes = [
   },
   {
     symbol: "v",
+    audioFile: "v.mp3",
     type: "子音",
     name: "v",
     description: "上齒輕咬下唇，氣流穿出且喉嚨振動",
@@ -245,6 +269,7 @@ const kkPhonemes = [
   },
   {
     symbol: "θ",
+    audioFile: "θ.mp3",
     type: "子音",
     name: "th（清音）",
     description: "舌尖輕放上下齒之間，氣流穿出，不振動，這個音中文沒有",
@@ -255,6 +280,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ð",
+    audioFile: "ð.mp3",
     type: "子音",
     name: "th（濁音）",
     description: "舌尖輕放上下齒之間，氣流穿出且喉嚨振動，這個音中文沒有",
@@ -265,6 +291,7 @@ const kkPhonemes = [
   },
   {
     symbol: "s",
+    audioFile: "s.mp3",
     type: "子音",
     name: "s",
     description: "舌尖靠近上齒齦，氣流從縫隙穿出，尖銳",
@@ -275,6 +302,7 @@ const kkPhonemes = [
   },
   {
     symbol: "z",
+    audioFile: "z.mp3",
     type: "子音",
     name: "z",
     description: "與 s 相同位置，但喉嚨振動",
@@ -285,6 +313,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ʃ",
+    audioFile: "ʃ.mp3",
     type: "子音",
     name: "sh",
     description: "嘴唇略圓前突，舌頭後縮，氣流穿出",
@@ -295,6 +324,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ʒ",
+    audioFile: "ʒ.mp3",
     type: "子音",
     name: "zh（濁音）",
     description: "與 ʃ 相同位置，喉嚨振動",
@@ -305,6 +335,7 @@ const kkPhonemes = [
   },
   {
     symbol: "tʃ",
+    audioFile: "tʃ.mp3",
     type: "子音",
     name: "ch",
     description: "t 和 ʃ 連發，舌尖先頂後放氣",
@@ -315,6 +346,7 @@ const kkPhonemes = [
   },
   {
     symbol: "dʒ",
+    audioFile: "dʒ.mp3",
     type: "子音",
     name: "j（有聲）",
     description: "d 和 ʒ 連發，有聲版的 ch",
@@ -325,6 +357,7 @@ const kkPhonemes = [
   },
   {
     symbol: "m",
+    audioFile: "m.mp3",
     type: "子音",
     name: "m",
     description: "雙唇閉合，氣流從鼻腔穿出，喉嚨振動",
@@ -335,6 +368,7 @@ const kkPhonemes = [
   },
   {
     symbol: "n",
+    audioFile: "n.mp3",
     type: "子音",
     name: "n",
     description: "舌尖頂上齒齦，氣流從鼻腔穿出",
@@ -345,6 +379,7 @@ const kkPhonemes = [
   },
   {
     symbol: "ŋ",
+    audioFile: "ŋ.mp3",
     type: "子音",
     name: "ng",
     description: "舌後部頂軟顎，氣流從鼻腔穿出",
@@ -355,6 +390,7 @@ const kkPhonemes = [
   },
   {
     symbol: "l",
+    audioFile: "l.mp3",
     type: "子音",
     name: "l",
     description: "舌尖頂上齒齦，氣流從舌兩側穿出",
@@ -365,6 +401,7 @@ const kkPhonemes = [
   },
   {
     symbol: "r",
+    audioFile: "r.mp3",
     type: "子音",
     name: "r",
     description: "舌頭中後部往上捲，不碰任何地方，嘴唇略圓，這個音跟中文的 r 不同",
@@ -375,6 +412,7 @@ const kkPhonemes = [
   },
   {
     symbol: "w",
+    audioFile: "w.mp3",
     type: "子音",
     name: "w",
     description: "嘴唇圓起前突，快速滑向下一個母音",
@@ -385,6 +423,7 @@ const kkPhonemes = [
   },
   {
     symbol: "j",
+    audioFile: "j.mp3",
     type: "子音",
     name: "y",
     description: "舌頭前高位，快速滑向下一個母音",
@@ -395,6 +434,7 @@ const kkPhonemes = [
   },
   {
     symbol: "h",
+    audioFile: "h.mp3",
     type: "子音",
     name: "h",
     description: "聲門送氣，聲道開放，氣流直接穿出",
@@ -426,13 +466,21 @@ function speak(text) {
 }
 
 function playPhoneme(phoneme) {
-  if (!window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const utt = new SpeechSynthesisUtterance(phoneme.ttsText);
-  utt.lang = "en-US";
-  utt.rate = 0.5;
-  utt.pitch = 1.0;
-  window.speechSynthesis.speak(utt);
+  const speakFallback = () => {
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(phoneme.ttsText);
+    utt.lang = "en-US";
+    utt.rate = 0.5;
+    window.speechSynthesis.speak(utt);
+  };
+
+  if (phoneme.audioFile) {
+    const audio = new Audio(`/audio/${encodeURIComponent(phoneme.audioFile)}`);
+    audio.play().catch(speakFallback);
+  } else {
+    speakFallback();
+  }
 }
 
 function buildQuizQuestion(phoneme, pool) {
