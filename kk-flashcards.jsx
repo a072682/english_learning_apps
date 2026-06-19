@@ -10,6 +10,7 @@ const kkPhonemes = [
     examples: ["see /si/", "meet /mit/", "feet /fit/"],
     color: "#E8F4FD",
     accent: "#2196F3",
+    ttsText: "ee",
   },
   {
     symbol: "ɪ",
@@ -19,6 +20,7 @@ const kkPhonemes = [
     examples: ["sit /sɪt/", "bit /bɪt/", "him /hɪm/"],
     color: "#E8F4FD",
     accent: "#1565C0",
+    ttsText: "ih",
   },
   {
     symbol: "e",
@@ -28,6 +30,7 @@ const kkPhonemes = [
     examples: ["say /se/", "they /ðe/", "eight /et/"],
     color: "#E8F4FD",
     accent: "#0288D1",
+    ttsText: "ay",
   },
   {
     symbol: "ɛ",
@@ -37,6 +40,7 @@ const kkPhonemes = [
     examples: ["bed /bɛd/", "ten /tɛn/", "get /ɡɛt/"],
     color: "#E8F4FD",
     accent: "#01579B",
+    ttsText: "eh",
   },
   {
     symbol: "æ",
@@ -46,6 +50,7 @@ const kkPhonemes = [
     examples: ["cat /kæt/", "bad /bæd/", "man /mæn/"],
     color: "#FFF3E0",
     accent: "#E65100",
+    ttsText: "aah",
   },
   {
     symbol: "ɑ",
@@ -55,6 +60,7 @@ const kkPhonemes = [
     examples: ["father /ˈfɑðɚ/", "hot /hɑt/", "car /kɑr/"],
     color: "#E8F4FD",
     accent: "#1976D2",
+    ttsText: "ah",
   },
   {
     symbol: "ɔ",
@@ -64,6 +70,7 @@ const kkPhonemes = [
     examples: ["law /lɔ/", "call /kɔl/", "all /ɔl/"],
     color: "#E8F4FD",
     accent: "#1565C0",
+    ttsText: "aw",
   },
   {
     symbol: "o",
@@ -73,6 +80,7 @@ const kkPhonemes = [
     examples: ["go /ɡo/", "boat /bot/", "home /hom/"],
     color: "#E8F4FD",
     accent: "#0277BD",
+    ttsText: "oh",
   },
   {
     symbol: "ʊ",
@@ -82,6 +90,7 @@ const kkPhonemes = [
     examples: ["book /bʊk/", "good /ɡʊd/", "put /pʊt/"],
     color: "#E8F4FD",
     accent: "#1976D2",
+    ttsText: "uh",
   },
   {
     symbol: "u",
@@ -91,6 +100,7 @@ const kkPhonemes = [
     examples: ["food /fud/", "blue /blu/", "too /tu/"],
     color: "#E8F4FD",
     accent: "#1565C0",
+    ttsText: "oo",
   },
   {
     symbol: "ʌ",
@@ -100,6 +110,7 @@ const kkPhonemes = [
     examples: ["cup /kʌp/", "but /bʌt/", "love /lʌv/"],
     color: "#FFF3E0",
     accent: "#BF360C",
+    ttsText: "uh",
   },
   {
     symbol: "ə",
@@ -109,6 +120,7 @@ const kkPhonemes = [
     examples: ["about /əˈbaʊt/", "the /ðə/", "sofa /ˈsoʊfə/"],
     color: "#FFF3E0",
     accent: "#E64A19",
+    ttsText: "uh",
   },
   {
     symbol: "ɚ",
@@ -118,6 +130,7 @@ const kkPhonemes = [
     examples: ["her /hɚ/", "bird /bɚd/", "butter /ˈbʌtɚ/"],
     color: "#FFF3E0",
     accent: "#D84315",
+    ttsText: "er",
   },
   {
     symbol: "aɪ",
@@ -127,6 +140,7 @@ const kkPhonemes = [
     examples: ["my /maɪ/", "bite /baɪt/", "sky /skaɪ/"],
     color: "#F3E5F5",
     accent: "#7B1FA2",
+    ttsText: "eye",
   },
   {
     symbol: "aʊ",
@@ -136,6 +150,7 @@ const kkPhonemes = [
     examples: ["how /haʊ/", "now /naʊ/", "out /aʊt/"],
     color: "#F3E5F5",
     accent: "#6A1B9A",
+    ttsText: "ow",
   },
   {
     symbol: "ɔɪ",
@@ -145,6 +160,7 @@ const kkPhonemes = [
     examples: ["boy /bɔɪ/", "oil /ɔɪl/", "coin /kɔɪn/"],
     color: "#F3E5F5",
     accent: "#4A148C",
+    ttsText: "oy",
   },
   // 子音 Consonants
   {
@@ -155,6 +171,7 @@ const kkPhonemes = [
     examples: ["pen /pɛn/", "cap /kæp/", "top /tɑp/"],
     color: "#E8F5E9",
     accent: "#2E7D32",
+    ttsText: "puh",
   },
   {
     symbol: "b",
@@ -164,6 +181,7 @@ const kkPhonemes = [
     examples: ["bat /bæt/", "big /bɪɡ/", "cab /kæb/"],
     color: "#E8F5E9",
     accent: "#1B5E20",
+    ttsText: "buh",
   },
   {
     symbol: "t",
@@ -173,6 +191,7 @@ const kkPhonemes = [
     examples: ["top /tɑp/", "sit /sɪt/", "let /lɛt/"],
     color: "#E8F5E9",
     accent: "#388E3C",
+    ttsText: "tuh",
   },
   {
     symbol: "d",
@@ -182,6 +201,7 @@ const kkPhonemes = [
     examples: ["dog /dɑɡ/", "bed /bɛd/", "end /ɛnd/"],
     color: "#E8F5E9",
     accent: "#2E7D32",
+    ttsText: "duh",
   },
   {
     symbol: "k",
@@ -191,6 +211,7 @@ const kkPhonemes = [
     examples: ["cat /kæt/", "back /bæk/", "king /kɪŋ/"],
     color: "#E8F5E9",
     accent: "#1B5E20",
+    ttsText: "kuh",
   },
   {
     symbol: "ɡ",
@@ -200,6 +221,7 @@ const kkPhonemes = [
     examples: ["go /ɡo/", "big /bɪɡ/", "get /ɡɛt/"],
     color: "#E8F5E9",
     accent: "#388E3C",
+    ttsText: "guh",
   },
   {
     symbol: "f",
@@ -209,6 +231,7 @@ const kkPhonemes = [
     examples: ["fan /fæn/", "life /laɪf/", "off /ɔf/"],
     color: "#E8F5E9",
     accent: "#2E7D32",
+    ttsText: "fff",
   },
   {
     symbol: "v",
@@ -218,6 +241,7 @@ const kkPhonemes = [
     examples: ["van /væn/", "love /lʌv/", "very /ˈvɛri/"],
     color: "#E8F5E9",
     accent: "#1B5E20",
+    ttsText: "vvv",
   },
   {
     symbol: "θ",
@@ -227,6 +251,7 @@ const kkPhonemes = [
     examples: ["think /θɪŋk/", "bath /bæθ/", "three /θri/"],
     color: "#FFF3E0",
     accent: "#E65100",
+    ttsText: "thhh",
   },
   {
     symbol: "ð",
@@ -236,6 +261,7 @@ const kkPhonemes = [
     examples: ["the /ðə/", "this /ðɪs/", "that /ðæt/"],
     color: "#FFF3E0",
     accent: "#BF360C",
+    ttsText: "thee",
   },
   {
     symbol: "s",
@@ -245,6 +271,7 @@ const kkPhonemes = [
     examples: ["sun /sʌn/", "bus /bʌs/", "sea /si/"],
     color: "#E8F5E9",
     accent: "#388E3C",
+    ttsText: "sss",
   },
   {
     symbol: "z",
@@ -254,6 +281,7 @@ const kkPhonemes = [
     examples: ["zoo /zu/", "quiz /kwɪz/", "zero /ˈzɪro/"],
     color: "#E8F5E9",
     accent: "#2E7D32",
+    ttsText: "zzz",
   },
   {
     symbol: "ʃ",
@@ -263,6 +291,7 @@ const kkPhonemes = [
     examples: ["she /ʃi/", "fish /fɪʃ/", "shop /ʃɑp/"],
     color: "#E8F5E9",
     accent: "#1B5E20",
+    ttsText: "shh",
   },
   {
     symbol: "ʒ",
@@ -272,6 +301,7 @@ const kkPhonemes = [
     examples: ["vision /ˈvɪʒən/", "measure /ˈmɛʒɚ/", "genre /ˈʒɑnrə/"],
     color: "#E8F5E9",
     accent: "#388E3C",
+    ttsText: "zhh",
   },
   {
     symbol: "tʃ",
@@ -281,6 +311,7 @@ const kkPhonemes = [
     examples: ["chair /tʃɛr/", "watch /wɑtʃ/", "church /tʃɚtʃ/"],
     color: "#E8F5E9",
     accent: "#2E7D32",
+    ttsText: "ch",
   },
   {
     symbol: "dʒ",
@@ -290,6 +321,7 @@ const kkPhonemes = [
     examples: ["judge /dʒʌdʒ/", "age /edʒ/", "job /dʒɑb/"],
     color: "#E8F5E9",
     accent: "#1B5E20",
+    ttsText: "juh",
   },
   {
     symbol: "m",
@@ -299,6 +331,7 @@ const kkPhonemes = [
     examples: ["map /mæp/", "him /hɪm/", "name /nem/"],
     color: "#E8F5E9",
     accent: "#388E3C",
+    ttsText: "mmm",
   },
   {
     symbol: "n",
@@ -308,6 +341,7 @@ const kkPhonemes = [
     examples: ["no /no/", "ten /tɛn/", "sun /sʌn/"],
     color: "#E8F5E9",
     accent: "#2E7D32",
+    ttsText: "nnn",
   },
   {
     symbol: "ŋ",
@@ -317,6 +351,7 @@ const kkPhonemes = [
     examples: ["sing /sɪŋ/", "ring /rɪŋ/", "king /kɪŋ/"],
     color: "#E8F5E9",
     accent: "#1B5E20",
+    ttsText: "ng",
   },
   {
     symbol: "l",
@@ -326,6 +361,7 @@ const kkPhonemes = [
     examples: ["leg /lɛɡ/", "ball /bɔl/", "all /ɔl/"],
     color: "#E8F5E9",
     accent: "#388E3C",
+    ttsText: "lll",
   },
   {
     symbol: "r",
@@ -335,6 +371,7 @@ const kkPhonemes = [
     examples: ["red /rɛd/", "car /kɑr/", "run /rʌn/"],
     color: "#FFF3E0",
     accent: "#E64A19",
+    ttsText: "rrr",
   },
   {
     symbol: "w",
@@ -344,6 +381,7 @@ const kkPhonemes = [
     examples: ["wet /wɛt/", "will /wɪl/", "way /we/"],
     color: "#E8F5E9",
     accent: "#2E7D32",
+    ttsText: "wuh",
   },
   {
     symbol: "j",
@@ -353,6 +391,7 @@ const kkPhonemes = [
     examples: ["yes /jɛs/", "you /ju/", "yard /jɑrd/"],
     color: "#E8F5E9",
     accent: "#1B5E20",
+    ttsText: "yuh",
   },
   {
     symbol: "h",
@@ -362,6 +401,7 @@ const kkPhonemes = [
     examples: ["hat /hæt/", "hot /hɑt/", "home /hom/"],
     color: "#E8F5E9",
     accent: "#388E3C",
+    ttsText: "hhh",
   },
 ];
 
@@ -382,6 +422,16 @@ function speak(text) {
   const utt = new SpeechSynthesisUtterance(word);
   utt.lang = "en-US";
   utt.rate = 0.8;
+  window.speechSynthesis.speak(utt);
+}
+
+function playPhoneme(phoneme) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(phoneme.ttsText);
+  utt.lang = "en-US";
+  utt.rate = 0.5;
+  utt.pitch = 1.0;
   window.speechSynthesis.speak(utt);
 }
 
@@ -445,7 +495,7 @@ export default function KKFlashcards() {
 
   useEffect(() => {
     if (mode === "quiz" && quizQuestion?.type === "B") {
-      speak(quizQuestion.phoneme.examples[0]);
+      playPhoneme(quizQuestion.phoneme);
     }
   }, [mode, quizQuestion]);
 
@@ -599,7 +649,7 @@ export default function KKFlashcards() {
           quizFinished={quizFinished}
           onAnswer={handleQuizAnswer}
           onRestart={startQuiz}
-          onReplay={() => quizQuestion && speak(quizQuestion.phoneme.examples[0])}
+          onReplay={() => quizQuestion && playPhoneme(quizQuestion.phoneme)}
         />
       ) : (
       <>
@@ -642,7 +692,7 @@ export default function KKFlashcards() {
         }}
       >
         <div
-          onClick={() => speak(current.examples[0])}
+          onClick={() => playPhoneme(current)}
           style={{
             fontSize: "72px",
             color: current.accent,
