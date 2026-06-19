@@ -465,21 +465,26 @@ function speak(text) {
   window.speechSynthesis.speak(utt);
 }
 
+let currentAudio = null;
+
 function playPhoneme(phoneme) {
-  const speakFallback = () => {
-    if (!window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
+  // 如果正在播放就不做任何事
+  if (currentAudio && !currentAudio.ended) return;
+
+  if (phoneme.audioFile) {
+    currentAudio = new Audio(`/audio/${encodeURIComponent(phoneme.audioFile)}`);
+    currentAudio.play().catch(() => {
+      const utt = new SpeechSynthesisUtterance(phoneme.ttsText);
+      utt.lang = "en-US";
+      utt.rate = 0.5;
+      window.speechSynthesis.speak(utt);
+    });
+  } else {
+    if (window.speechSynthesis.speaking) return;
     const utt = new SpeechSynthesisUtterance(phoneme.ttsText);
     utt.lang = "en-US";
     utt.rate = 0.5;
     window.speechSynthesis.speak(utt);
-  };
-
-  if (phoneme.audioFile) {
-    const audio = new Audio(`/audio/${encodeURIComponent(phoneme.audioFile)}`);
-    audio.play().catch(speakFallback);
-  } else {
-    speakFallback();
   }
 }
 
